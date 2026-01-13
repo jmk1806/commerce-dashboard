@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   compiler: {
     emotion: true,
   },
+  reactCompiler: true,
 };
 
 module.exports = nextConfig;
