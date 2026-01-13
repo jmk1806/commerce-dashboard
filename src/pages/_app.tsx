@@ -1,18 +1,16 @@
-import { useState, useEffect } from 'react';
-import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Global } from '@emotion/react';
-import { globalStyles } from '@/styles';
+import { useState, useEffect } from "react";
+import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Global } from "@emotion/react";
+import { globalStyles } from "@/styles";
+import "pretendard/dist/web/variable/pretendardvariable.css";
 
-// MSW는 개발 환경에서만 활성화
-async function initMocks() {
-  if (typeof window === 'undefined') return;
-  if (process.env.NODE_ENV !== 'development') return;
+async function enableMocking() {
+  if (typeof window === "undefined") return;
+  if (process.env.NODE_ENV !== "development") return;
 
-  const { worker } = await import('@/api/mocks/browser');
-  await worker.start({
-    onUnhandledRequest: 'bypass',
-  });
+  const { worker } = await import("@/api/mocks/browser");
+  return worker.start();
 }
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -23,7 +21,6 @@ export default function App({ Component, pageProps }: AppProps) {
           queries: {
             staleTime: 1000 * 60, // 1분
             retry: 1,
-            refetchOnWindowFocus: false,
           },
         },
       })
@@ -32,11 +29,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const [mockReady, setMockReady] = useState(false);
 
   useEffect(() => {
-    initMocks().then(() => setMockReady(true));
+    enableMocking().then(() => setMockReady(true));
   }, []);
 
   // 개발 환경에서 MSW 준비 전에는 렌더링하지 않음
-  if (process.env.NODE_ENV === 'development' && !mockReady) {
+  if (process.env.NODE_ENV === "development" && !mockReady) {
     return null;
   }
 

@@ -1,13 +1,13 @@
-import HomePage from "@/components/pages/HomePage";
+import ProductsPage from "@/components/pages/ProductsPage";
 import Head from "next/head";
 
 export default function Page() {
   return (
     <>
       <Head>
-        <title>Commerce Dashboard</title>
+        <title>Products</title>
       </Head>
-      <HomePage />
+      <ProductsPage />
     </>
   );
 }
