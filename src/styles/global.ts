@@ -1,5 +1,5 @@
-import { css } from '@emotion/react';
-import { colors, typography } from './theme';
+import { css } from "@emotion/react";
+import { colors } from "./theme";
 
 export const globalStyles = css`
   *,
@@ -17,11 +17,11 @@ export const globalStyles = css`
   }
 
   body {
-    font-family: ${typography.fontFamily.sans};
-    font-size: ${typography.fontSize.base};
-    line-height: ${typography.lineHeight.normal};
-    color: ${colors.gray[900]};
-    background-color: ${colors.gray[50]};
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: ${colors.gray900};
+    background-color: ${colors.gray50};
   }
 
   a {
@@ -59,21 +59,21 @@ export const globalStyles = css`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${colors.gray[100]};
+    background: ${colors.gray100};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${colors.gray[300]};
+    background: ${colors.gray300};
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${colors.gray[400]};
+    background: ${colors.gray400};
   }
 
   /* 포커스 스타일 */
   :focus-visible {
-    outline: 2px solid ${colors.primary[500]};
+    outline: 2px solid ${colors.primary500};
     outline-offset: 2px;
   }
 `;
