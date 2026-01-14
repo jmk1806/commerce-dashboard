@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Products</title>
+        <title>Products Management - Commerce Dashboard</title>
       </Head>
       <ProductsPage />
     </>
