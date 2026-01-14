@@ -3,7 +3,7 @@ export const Period = {
   THIS_YEAR: 'year',
   LAST_YEAR: 'last_year',
   THIS_QUARTER: 'this_quarter',
-  LAST_QUARTER: 'previous_quarter',
+  LAST_QUARTER: 'last_quarter',
 } as const;
 
 export type PeriodType = (typeof Period)[keyof typeof Period];
