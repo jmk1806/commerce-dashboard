@@ -30,7 +30,7 @@ export const colors = {
 export const fontWeight = {
   normal: 400,
   medium: 500,
-  "semi-bold": 600,
+  semiBold: 600,
   bold: 700,
 } as const;
 

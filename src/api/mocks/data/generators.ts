@@ -74,7 +74,7 @@ export const generateOrder = (id?: string): Order => {
     const quantity = randomInt(1, 5);
     return {
       productId: generateId(),
-      productName: productNames[category][randomInt(0, 4)],
+      productName: productNames[category][randomInt(0, productNames[category].length - 1)],
       quantity,
       unitPrice,
       totalPrice: unitPrice * quantity,

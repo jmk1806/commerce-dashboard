@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Product Detail</title>
+        <title>Product {id} - Commerce Dashboard</title>
       </Head>
       <ProductDetailPage id={id} />
     </>

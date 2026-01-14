@@ -35,7 +35,6 @@ function serializeParams(params: Record<string, unknown>): string {
       return;
     }
 
-    // 일반 객체는 건너뛰기 (sort 같은 복잡한 타입은 이미 문자열로 변환되어 전달됨)
     if (typeof value === 'object') return;
 
     searchParams.append(key, String(value));

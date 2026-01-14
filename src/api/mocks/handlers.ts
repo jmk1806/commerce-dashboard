@@ -5,7 +5,6 @@ import {
   generateOrder,
   generateProduct,
   generateDailySummary,
-  randomInt,
 } from './data/generators';
 import type { Order, Product, DailySummary } from '@/types';
 
@@ -14,6 +13,10 @@ const store = {
   orders: Array.from({ length: 50 }, () => generateOrder()) as Order[],
   products: Array.from({ length: 30 }, () => generateProduct()) as Product[],
   memos: new Map<string, { memo: string; updatedAt: string; updatedBy: string }>(),
+};
+
+const user = {
+  name: '현재 사용자',
 };
 
 export const handlers = [
@@ -182,7 +185,7 @@ export const handlers = [
     store.memos.set(date, {
       memo,
       updatedAt: new Date().toISOString(),
-      updatedBy: '현재 사용자',
+      updatedBy: user.name,
     });
 
     return HttpResponse.json(
@@ -207,7 +210,7 @@ export const handlers = [
     store.memos.set(date, {
       memo,
       updatedAt: new Date().toISOString(),
-      updatedBy: '현재 사용자',
+      updatedBy: user.name,
     });
 
     return HttpResponse.json({ success: true, message: '메모가 수정되었습니다.' });

@@ -20,11 +20,11 @@ import type {
 
 /** KPI */
 export const kpiApi = {
-  getMetrics: (params: KpiParams) =>
-    apiClient.get<SingleResponse<KpiWithChange>>('/kpi', { ...params }),
+  getMetrics: ({ period }: KpiParams) =>
+    apiClient.get<SingleResponse<KpiWithChange>>('/kpi', { period }),
 
-  getCategoryInsights: (params: KpiParams) =>
-    apiClient.get<SingleResponse<CategoryInsight[]>>('/kpi/categories', { ...params }),
+  getCategoryInsights: ({ period }: KpiParams) =>
+    apiClient.get<SingleResponse<CategoryInsight[]>>('/kpi/categories', { period }),
 };
 
 /** 주문 */
