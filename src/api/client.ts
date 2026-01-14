@@ -25,7 +25,17 @@ function serializeParams(params: Record<string, unknown>): string {
   Object.entries(params).forEach(([key, value]) => {
     if (value === undefined || value === null) return;
 
-    // 객체는 건너뛰기 (sort 같은 복잡한 타입은 이미 문자열로 변환되어 전달됨)
+    // 배열 처리: 각 요소를 같은 키로 추가
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        if (item !== undefined && item !== null) {
+          searchParams.append(key, String(item));
+        }
+      });
+      return;
+    }
+
+    // 일반 객체는 건너뛰기 (sort 같은 복잡한 타입은 이미 문자열로 변환되어 전달됨)
     if (typeof value === 'object') return;
 
     searchParams.append(key, String(value));
