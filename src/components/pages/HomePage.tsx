@@ -1,11 +1,26 @@
-import styled from "@emotion/styled";
+/** @jsxImportSource @emotion/react */
+import type { ReactNode } from "react";
+import { css } from "@emotion/react";
 import {
   Layout,
   Header,
+  Main,
   Section,
   SectionTitle,
   Placeholder,
+  ContentArea,
+  Sidebar,
 } from "@/components/layouts/PageLayout";
+
+const gridStyle = css`
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+`;
+
+function GridMain({ children }: { children: ReactNode }) {
+  return <Main css={gridStyle}>{children}</Main>;
+}
 
 export default function HomePage() {
   return (
@@ -13,7 +28,7 @@ export default function HomePage() {
       <Header>
         <h1>Commerce Dashboard</h1>
       </Header>
-      <Main>
+      <GridMain>
         <ContentArea>
           <Section>
             <SectionTitle>KPI</SectionTitle>
@@ -40,29 +55,7 @@ export default function HomePage() {
           <SectionTitle>주문 리스트</SectionTitle>
           <Placeholder>사이드바 주문 목록</Placeholder>
         </Sidebar>
-      </Main>
+      </GridMain>
     </Layout>
   );
 }
-
-const Main = styled.main`
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 24px;
-  padding: 24px;
-`;
-
-const ContentArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`;
-
-const Sidebar = styled.aside`
-  background: white;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
-  height: fit-content;
-`;
