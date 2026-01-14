@@ -82,9 +82,20 @@ export const handlers = [
     const cursor = url.searchParams.get('cursor');
     const limit = Number(url.searchParams.get('limit')) || 10;
 
-    const startIndex = cursor
-      ? store.orders.findIndex((o) => o.id === cursor) + 1
-      : 0;
+    let startIndex = 0;
+    if (cursor) {
+      const index = store.orders.findIndex((o) => o.id === cursor);
+      if (index === -1) {
+        // Invalid cursor: return empty result instead of restarting from beginning
+        return HttpResponse.json({
+          data: [],
+          nextCursor: null,
+          hasMore: false,
+        });
+      }
+      startIndex = index + 1;
+    }
+
     const data = store.orders.slice(startIndex, startIndex + limit);
     const hasMore = startIndex + limit < store.orders.length;
     const nextCursor = hasMore ? data[data.length - 1]?.id ?? null : null;
