@@ -25,7 +25,7 @@ export const hasDateRangeAtom = atom((get) => {
 });
 
 /** 필터 초기화 */
-export const resetFiltersAtom = atom(null, (_, set) => {
+export const resetFiltersAtom = atom(undefined, (_, set) => {
   set(selectedPeriodAtom, Period.THIS_YEAR);
   set(selectedCategoryAtom, null);
   set(selectedDateRangeAtom, { from: null, to: null });
