@@ -150,6 +150,22 @@ export const handlers = [
     return HttpResponse.json({ data: summaries });
   }),
 
+  // 특정 날짜 요약
+  http.get('/api/calendar/:date', async ({ params }) => {
+    await delay(200);
+    const date = params.date as string;
+    const memo = store.memos.get(date);
+
+    return HttpResponse.json({
+      data: {
+        ...generateDailySummary(date),
+        memo: memo?.memo,
+        memoUpdatedAt: memo?.updatedAt,
+        memoUpdatedBy: memo?.updatedBy,
+      },
+    });
+  }),
+
   // 날짜별 메모 저장/수정
   http.post('/api/calendar/memo', async ({ request }) => {
     await delay(200);
