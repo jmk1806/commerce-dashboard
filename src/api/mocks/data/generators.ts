@@ -11,7 +11,18 @@ import {
 } from '@/types';
 
 /** 랜덤 ID 생성 */
-export const generateId = () => Math.random().toString(36).substring(2, 11);
+export const generateId = (() => {
+  let counter = 0;
+  return () => {
+    // Prefer crypto.randomUUID when available for better uniqueness
+    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+      return crypto.randomUUID();
+    }
+    // Fallback: time-based ID with incrementing counter to minimize collisions
+    counter += 1;
+    return `mock-${Date.now().toString(36)}-${counter.toString(36)}`;
+  };
+})();
 
 /** 랜덤 숫자 (범위) */
 export const randomInt = (min: number, max: number) =>
