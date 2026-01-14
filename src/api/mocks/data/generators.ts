@@ -85,7 +85,7 @@ export const generateOrder = (id?: string): Order => {
 
   return {
     id: id ?? generateId(),
-    orderNumber: `ORD-${Date.now()}-${randomInt(1000, 9999)}`,
+    orderNumber: `ORD-${Date.now()}-${generateId()}`,
     customerName: `고객${randomInt(1, 100)}`,
     status,
     category,
