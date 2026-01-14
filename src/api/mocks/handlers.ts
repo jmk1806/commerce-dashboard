@@ -166,26 +166,46 @@ export const handlers = [
     });
   }),
 
-  // 날짜별 메모 저장/수정
+  // 날짜별 메모 생성
   http.post('/api/calendar/memo', async ({ request }) => {
     await delay(200);
     const body = (await request.json()) as { date: string; memo: string };
+    const { date, memo } = body;
 
-    store.memos.set(body.date, {
-      memo: body.memo,
+    if (store.memos.has(date)) {
+      return HttpResponse.json(
+        { code: 'CONFLICT', message: '이미 해당 날짜에 메모가 존재합니다.' },
+        { status: 409 }
+      );
+    }
+
+    store.memos.set(date, {
+      memo,
       updatedAt: new Date().toISOString(),
       updatedBy: '현재 사용자',
     });
 
-    return HttpResponse.json({ success: true, message: '메모가 저장되었습니다.' });
+    return HttpResponse.json(
+      { success: true, message: '메모가 저장되었습니다.' },
+      { status: 201 }
+    );
   }),
 
+  // 날짜별 메모 수정
   http.put('/api/calendar/memo', async ({ request }) => {
     await delay(200);
     const body = (await request.json()) as { date: string; memo: string };
+    const { date, memo } = body;
 
-    store.memos.set(body.date, {
-      memo: body.memo,
+    if (!store.memos.has(date)) {
+      return HttpResponse.json(
+        { code: 'NOT_FOUND', message: '해당 날짜에 수정할 메모가 없습니다.' },
+        { status: 404 }
+      );
+    }
+
+    store.memos.set(date, {
+      memo,
       updatedAt: new Date().toISOString(),
       updatedBy: '현재 사용자',
     });
